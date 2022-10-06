@@ -31,6 +31,7 @@ jobs:
       - run: cp -rf ./build/* ./gh-pages
       - run: |
           cd ./gh-pages
-          git commit -a -m "${{ github.actor }} deploy"
+          git add .
+          git commit -m "${{ github.actor }} deploy"
           git push origin gh-pages
           cd ..
