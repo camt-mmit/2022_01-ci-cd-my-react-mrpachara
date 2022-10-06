@@ -1,9 +1,9 @@
 name: test-feature
-run-name: ${{ github.actor }} is testing v1.0
+run-name: ${{ github.actor }} is testing v3.0
 on:
   push:
     branches:
-      - v2.0
+      - v3.0
 jobs:
   test-feature:
     runs-on: ubuntu-latest
@@ -18,17 +18,17 @@ jobs:
         run: |
           git config --global user.email "${{ github.event.pusher.email }}"
           git config --global user.name "${{ github.actor }}"
-      # - name: Install yarn
-      #   run: npm install -g yarn
-      # - name: Install dependencies
-      #   run: yarn install --frozen-lockfile
-      # - name: Test v1.0
-      #   run: yarn run test
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Test v1.0
+        run: yarn run test
       - name: Merge to main branch
         run: |
           git fetch --unshallow
           git checkout main
           ls
           cat ./src/App.tsx
-          git merge v2.0
+          git merge v3.0
           git push origin main
