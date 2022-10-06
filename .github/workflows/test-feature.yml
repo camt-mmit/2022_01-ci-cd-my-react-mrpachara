@@ -28,7 +28,5 @@ jobs:
         run: |
           git fetch --unshallow
           git checkout main
-          ls
-          cat ./src/App.tsx
           git merge v3.0
           git push origin main
