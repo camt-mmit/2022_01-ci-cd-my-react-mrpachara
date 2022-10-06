@@ -24,7 +24,7 @@ jobs:
         run: |
           git fetch origin main
           git checkout main
-          git pull origin main
+          ls
+          cat ./src/App.tsx
           git merge v2.0
-          git add .
           git push origin main
