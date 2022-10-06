@@ -1,0 +1,22 @@
+name: test-feature
+run-name: ${{ github.actor }} is testing v1.0
+on:
+  push:
+    branches:
+      - v1.0
+jobs:
+  test-feature:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ github.token }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Test v1.0
+        run: yarn run test
