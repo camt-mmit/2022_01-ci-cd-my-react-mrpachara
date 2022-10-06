@@ -26,7 +26,7 @@ jobs:
           git remote add -t gh-pages origin \
           https://git:${{ github.token }}@github.com/${{ github.repository }}.git
           git fetch origin gh-pages
-          git cp -rf ../build/* ./
+          cp -rf ../build/* ./
           git commit -a -m "${{ github.actor }} deploy"
           git push orgin gh-pages
           cd ..
