@@ -18,15 +18,19 @@ jobs:
           git config --global user.name "${{ github.actor }}"
       - run: npm install -g yarn
       - run: yarn install
-      - run: PUBLIC_URL=/${{ github.repository }} yarn run build
+      - run: PUBLIC_URL=/${{ github.event.repository.name }} yarn run build
       - run: |
           mkdir ./gh-pages
           git init -b gh-pages ./gh-pages
+      - run: |
           cd ./gh-pages
           git remote add -t gh-pages origin \
           https://git:${{ github.token }}@github.com/${{ github.repository }}.git
           git pull origin gh-pages
-          cp -rf ../build/* ./
+          cd ..
+      - run: cp -rf ./build/* ./gh-pages
+      - run: |
+          cd ./gh-pages
           git commit -a -m "${{ github.actor }} deploy"
           git push origin gh-pages
           cd ..
