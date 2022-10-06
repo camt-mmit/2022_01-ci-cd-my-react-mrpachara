@@ -18,7 +18,7 @@ jobs:
           git config --global user.name "${{ github.actor }}"
       - run: npm install -g yarn
       - run: yarn install
-      - run: yarn run build
+      - run: PUBLIC_URL=/${{ github.repository }} yarn run build
       - run: |
           mkdir ./gh-pages
           git init -b gh-pages ./gh-pages
