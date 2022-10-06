@@ -23,8 +23,7 @@ jobs:
       - name: Merge to main branch
         run: |
           git fetch origin main
-          git rebase master
-          git checkout master
+          git checkout main
           git merge v2.0
           git add .
           git push origin main
