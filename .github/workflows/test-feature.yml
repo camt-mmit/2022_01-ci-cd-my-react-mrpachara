@@ -26,3 +26,5 @@ jobs:
           git rebase main
           git checkout main
           git merge v2.0
+          git add .
+          git push origin main
