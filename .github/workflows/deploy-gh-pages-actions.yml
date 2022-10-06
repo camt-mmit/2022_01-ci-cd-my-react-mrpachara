@@ -28,5 +28,5 @@ jobs:
           git pull origin gh-pages
           cp -rf ../build/* ./
           git commit -a -m "${{ github.actor }} deploy"
-          git push orgin gh-pages
+          git push origin gh-pages
           cd ..
