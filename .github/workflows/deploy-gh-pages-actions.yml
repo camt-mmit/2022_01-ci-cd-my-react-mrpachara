@@ -1,0 +1,32 @@
+name: deploy-gh-pages-actions
+run-name: ${{ github.actor }} is deploying gh-pages
+on:
+  push:
+    branchs: main
+jobs:
+  deploy-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ github.token }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - run: |
+          git config --global user.email "${{ github.event.pusher.email }}"
+          git config --global user.name "${{ github.actor }}"
+      - run: npm install -g yarn
+      - run: yarn install
+      - run: yarn run build
+      - run: |
+          mkdir ./gh-pages
+          git init -b gh-pages ./gh-pages
+          cd ./gh-pages
+          git remote add -t gh-pages origin \
+          https://git:${{ github.token }}@github.com/${{ github.repository }}.git
+          git fetch origin gh-pages
+          git cp -rf ../build/* ./
+          git commit -a -m "${{ github.actor }} deploy"
+          git push orgin gh-pages
+          cd ..
