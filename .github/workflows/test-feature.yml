@@ -24,6 +24,7 @@ jobs:
         run: |
           git fetch origin main
           git checkout main
+          git pull origin main
           git merge v2.0
           git add .
           git push origin main
