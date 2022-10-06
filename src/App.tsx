@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React by Pachara
+          Learn React by Pachara New
         </a>
       </header>
     </div>
