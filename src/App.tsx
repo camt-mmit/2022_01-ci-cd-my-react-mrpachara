@@ -16,7 +16,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React by Pachara New
+          Learn React git fectch -u origin gh-pages:gh-pages
         </a>
       </header>
     </div>

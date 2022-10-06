@@ -2,7 +2,8 @@ name: deploy-gh-pages-actions
 run-name: ${{ github.actor }} is deploying gh-pages
 on:
   push:
-    branchs: main
+    branches:
+      - main
 jobs:
   deploy-gh-pages:
     runs-on: ubuntu-latest
@@ -23,16 +24,13 @@ jobs:
         run: yarn install
       - name: Build project
         run: PUBLIC_URL=/${{ github.event.repository.name }} yarn run build
-      - name: Deploy gh-pages
+      - name: Deploy to gh-pages
         run: |
-          mkdir ./gh-pages
-          git init -b gh-pages ./gh-pages
-          cd ./gh-pages
+          cd ./build
+          git init -b gh-pages
           git remote add -t gh-pages origin \
           https://git:${{ github.token }}@github.com/${{ github.repository }}.git
-          git pull origin gh-pages
-          rm -rf ./*
-          cp -rf ../build/* ./
+          git fetch -u origin gh-pages:gh-pages
           git add .
           git commit -m "${{ github.actor }} deploy"
           git push origin gh-pages
