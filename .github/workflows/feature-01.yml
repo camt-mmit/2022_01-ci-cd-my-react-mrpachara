@@ -1,16 +1,16 @@
-name: feature-01 CI
-run-name: ${{ github.actor }} is integrating feature-01
+name: deploy-gh-pages-actions
+run-name: ${{ github.actor }} is deploying gh-pages
 on:
   push:
     branches:
-      - feature-01
+      - main
 jobs:
-  ci-feature-01:
+  deploy-gh-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.PUSH_MAIN }}
+          token: ${{ github.token }}
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
@@ -21,12 +21,17 @@ jobs:
       - name: Install yarn
         run: npm install -g yarn
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Test project
-        run: yarn run test
-      - name: Merge to main
+        run: yarn install
+      - name: Build project
+        run: PUBLIC_URL=/${{ github.event.repository.name }} yarn run build
+      - name: Deploy gh-pages
         run: |
-          git fetch --unshallow
-          git checkout main
-          git merge feature-01
-          git push origin main
+          cd ./build
+          git init -b gh-pages
+          git remote add -t gh-pages origin \
+          https://git:${{ github.token }}@github.com/${{ github.repository }}.git
+          git fetch -u origin gh-pages:gh-pages || exit 0
+          git add .
+          git commit -m "${{ github.actor }} deploy" || exit 0
+          git push origin gh-pages -f
+          cd ..
