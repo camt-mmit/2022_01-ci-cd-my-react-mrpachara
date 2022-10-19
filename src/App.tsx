@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import MyTest from './components/MyTest';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         >
           Learn React Test PUSH_MAIN next
         </a>
+        <MyTest />
       </header>
     </div>
   );
