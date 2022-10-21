@@ -17,7 +17,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React Test PUSH_MAIN next
+          Learn React Test Docker Hub Push
         </a>
         <MyTest />
       </header>
